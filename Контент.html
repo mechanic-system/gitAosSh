@@ -1,0 +1,320 @@
+<div id="pageStudyPlanning" class="section aos-page">		
+    <div class="container-title">
+        <div class="title">Планирование</div>
+    </div>
+
+    <div class="container-page">        
+        <div id="tabClasses" class="container-tab">
+            <div class="container-tools buttons">
+                <button action="add">Добавить</button>
+                <button action="edit" style="display: none;">Редактировать</button>
+                <button action="journal" style="display: none;">Журнал</button>
+                <button action="delete" style="display: none;">Удалить</button>
+            </div>
+    
+            <div class="container-tools filter">
+                <input type="text" placeholder="Поиск..."/>
+                <select>
+                    <option>По наименованию</option>
+                    <option>По дате начала</option>
+                    <option>По дате окончания</option>
+                    <option>По режиму</option>
+                    <option>По обучаемому</option>
+                </select>
+            </div>
+        
+            <div id="tableClasses" class="table aos-scroll aos-scroll-phone">
+    
+            </div>
+        </div>
+
+        <div id="tabEditClass" class="container-tab" style="display: none;">
+            <div class="container-tools buttons">
+                <button action="save">Сохранить</button>
+                <button action="close">Назад</button>
+            </div>
+
+            <div class="container-edit">
+                <div class="aos-scroll aos-scroll-phone">
+                    <div class="field disabled">
+                        <div>Преподаватель</div>
+                        <div class="value">Абрамов</div>
+                    </div>
+                    <div id="fieldName" class="field">
+                        <div>Наименование*</div>
+                        <div class="value"><input type="text"/></div>
+                    </div>
+                    <div id="fieldSchemeType" class="field">
+                        <div>Режим*</div>
+                        <div>
+                            <select id="selectSchemeType">
+                                <option value="1">Загрузка...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="fieldDateStart" class="field">
+                        <div>Дата начала*</div>
+                        <div class="value"><input type="text"/></div>
+                    </div>
+                    <div id="fieldDateEnd" class="field">
+                        <div>Дата окончания*</div>
+                        <div class="value"><input type="text"/></div>
+                    </div>
+                    <div id="fieldUsers" class="field">
+                        <div>Обучаемые*</div>
+                        <div class="values">
+                            <div class="buttons">
+                                <button action="addUser">Добавить</button>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div id="fieldTeams" class="field">
+                        <div>Бригады</div>
+                        <div class="values">
+                            <div class="buttons">
+                                <button action="addTeam">Добавить</button>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div id="fieldTools" class="field">
+                        <div>Задания*</div>
+                        <div class="values">
+                            <div class="buttons">
+                                <button action="addTool">Добавить</button>
+                                <button action="addTaskUser">Назначить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+  
+                </div>
+            </div>
+
+            <div id="dialogTools" class="aos-dialog-full-screen">
+                <div class="container-content">
+                    <div id="tableTools" class="table aos-scroll aos-scroll-phone">
+
+                    </div>
+                </div>
+            </div>
+        
+            <div id="dialogUsers" class="aos-dialog-full-screen">
+                <div id="treeUsers" class="container-content aos-scroll aos-scroll-phone">
+                </div>
+            </div>
+
+            <div id="dialogGeneral" class="aos-dialog-full-screen">
+                <div class="container-content">
+                    <div id="tableGeneral" class="table aos-scroll aos-scroll-phone">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        #pageStudyPlanning{    
+            font-size: 13px;
+        }
+
+        #pageStudyPlanning input{
+        	height: 100%;            
+            border: 0;
+            padding: 0;
+            border-radius: var(--border-radius);
+            background-color: transparent;
+        }
+
+        #pageStudyPlanning .container-tools input{
+            background-color: white;
+        }        
+
+        #pageStudyPlanning button{
+            width: 150px;
+            padding: var(--padding);
+            border: 0;
+            border-radius: var(--border-radius);
+        }
+
+        #pageStudyPlanning .container-page{
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        #pageStudyPlanning .container-tab{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;            
+        }
+        
+        #pageStudyPlanning .container-tools{
+            width: 100%;
+            height: 2rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: var(--margin);
+        }
+
+        #pageStudyPlanning .container-tools > * + *{
+            margin-left: var(--margin);
+        }
+        
+        #pageStudyPlanning .container-tools button{
+            background-color: var(--btn-tools-color);
+            color: white;
+        }
+
+        #pageStudyPlanning .container-tools button:hover{
+            background-color: var(--btn-tools-color-hover);
+        }
+
+        .table{
+            width: 100%;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: var(--padding);
+            flex-grow: 1;
+            overflow: auto;
+        }
+
+        .table .row{            
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            align-items: start;
+            padding: var(--padding);
+            border-radius: var(--border-radius);
+        }
+
+        .table .row:not(.disabled):hover{
+            cursor: pointer;
+            background-color: var(--back-color-hover);
+        }
+
+        .table .row.selected{
+            background-color: var(--back-color-select);
+        }
+        
+        .table .row + .row{
+            margin-top: var(--margin);
+        }
+
+        .table .row > div{
+            min-width: 200px;
+        }
+
+        .table .row > div + div{
+            margin-left: var(--margin);
+        }
+
+        #pageStudyPlanning .container-edit{
+            width: 100%;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: var(--padding);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+        }
+
+        #pageStudyPlanning .container-edit > div{
+            height: 100%;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        #pageStudyPlanning .container-edit > div + div{
+            margin-left: var(--margin);
+        }
+
+        #pageStudyPlanning .container-edit .field{
+            width: 100%;            
+            min-height: 2rem;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            box-sizing: border-box;
+        }
+
+        #pageStudyPlanning .container-edit .field + .field{
+            padding-bottom: var(--padding);
+        }
+
+        #pageStudyPlanning .container-edit button{
+            background-color: var(--back-color-select);
+        }
+
+        #pageStudyPlanning .container-edit button:hover{
+            background-color: var(--btn-back-color-hover);
+            color: white;
+        }
+
+        #pageStudyPlanning .container-edit .field .values{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: end;
+        }
+
+        #pageStudyPlanning .container-edit .field .values > * + *{
+            margin-top: var(--margin);
+        }
+
+        #pageStudyPlanning .container-edit .field > div:nth-child(1){
+            width: 100%;
+            max-width: 140px;
+            font-weight: bold;
+        }
+
+        #pageStudyPlanning .container-edit .field > div:nth-child(2){
+            flex-grow: 1;
+            margin-left: var(--margin);
+        }
+
+        #pageStudyPlanning .container-edit .field:not(.disabled) .value{
+            width: 100%;
+            background-color: var(--back-color-hover);
+            border-radius: var(--border-radius);
+            padding: var(--padding);  
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        #pageStudyPlanning .container-edit .field:not(.disabled) .value > * + *{
+            margin-left: var(--margin);
+        }
+
+        #pageStudyPlanning .container-edit .field:not(.disabled) .value > span{
+            flex-grow: 1;
+        }
+
+        #pageStudyPlanning .container-edit .field:not(.disabled) .value .icon-button{
+            width: 1rem;
+            min-width: 1rem;            
+            height: 1rem;
+            min-width: 1rem;
+            background-size: cover;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+
+        #treeUsers{
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius);
+            padding: var(--padding);
+            background-color: white;
+            overflow: auto;
+        }
+    </style>
+
+</div>
